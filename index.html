@@ -1,70 +1,161 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Menu Inicial</title>
-  <link rel="stylesheet" href="./style.css" />
-</head>
-<body>
-    <button class="back oculto"><</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu Inicial</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <button id="back" class="oculto"><</button>
 
-  <div id="container-menu" class="container">
-    <h1 class="titulo">Menu Principal</h1>
-    <div class="botoes-menu">
-        <button class="botao-link">Cadastrar Questões</button>
-        <button class="botao-link">Gerar Provas</button>
+    <div id="container">
+      <div id="container-menu" class="container">
+        <h1 class="titulo">Menu Principal</h1>
+        <div class="botoes-menu">
+          <button class="botao-link">Cadastrar Questões</button>
+          <button class="botao-link">Gerar Provas</button>
+          <button class="botao-link">Ver Provas</button>
+          <button id="botao-limpar" type="button" onclick="limparLocal()">Limpar Questões</button>
+        </div>
+      </div>
+
+      <div id="container-cadastrar-questoes" class="container oculto">
+        <h2 class="titulo">Cadastrar Questões</h2>
+        <form class="formulario" id="formulario">
+          <div class="campo">
+            <label for="materia">Matéria</label>
+            <input type="text" id="materia" placeholder="Ex: Programação Web" />
+          </div>
+
+          <div class="campo">
+            <label for="conteudo">Conteúdo</label>
+            <input
+              type="text"
+              id="conteudo"
+              placeholder="Ex: HTML, CSS, JavaScript"
+            />
+          </div>
+
+          <div class="campo">
+            <label for="enunciado">Enunciado da Questão</label>
+            <textarea
+              id="enunciado"
+              placeholder="Digite o enunciado da questão..."
+            ></textarea>
+          </div>
+
+          <div class="campo">
+            <label>Opções de Resposta</label>
+
+            <div class="alternativa">
+              <input type="radio" name="correta" value="0" />
+              <input type="text" class="opcaoInput" placeholder="Opção A" />
+            </div>
+
+            <div class="alternativa">
+              <input type="radio" name="correta" value="1" />
+              <input type="text" class="opcaoInput" placeholder="Opção B" />
+            </div>
+
+            <div class="alternativa">
+              <input type="radio" name="correta" value="2" />
+              <input type="text" class="opcaoInput" placeholder="Opção C" />
+            </div>
+
+            <div class="alternativa">
+              <input type="radio" name="correta" value="3" />
+              <input type="text" class="opcaoInput" placeholder="Opção D" />
+            </div>
+          </div>
+
+          <button type="button" onclick="adicionarQuestao()">
+            Adicionar Questão
+          </button>
+        </form>
+      </div>
+
+      <div id="container-gerar-prova" class="container oculto">
+        <div class="card-body">
+          <h4 class="titulo">Corpo de Prova</h4>
+          <form>
+            <div class="form-group">
+              <label for="cabecalho" class="form-label">Cabeçalho</label>
+              <input
+                type="text"
+                id="cabecalho"
+                placeholder="Digite o cabeçalho da prova"
+              />
+            </div>
+            <div class="form-group">
+              <label for="cadeira" class="form-label"
+                >Cadeira da Faculdade</label
+              >
+              <select id="cadeira">
+                <option selected disabled>Selecione a cadeira</option>
+                <option>Análise e Desenvolvimento de Sistemas</option>
+                <option>Engenharia de Software</option>
+                <option>Sistemas de Informação</option>
+                <option>Redes de Computadores</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="materia" class="form-label">Matéria</label>
+              <select id="materia">
+                <option selected disabled>Selecione a matéria</option>
+                <option>Programação Web</option>
+                <option>Banco de Dados</option>
+                <option>Algoritmos</option>
+                <option>Infraestrutura</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="conteudo" class="form-label">Conteúdo</label>
+              <input
+                type="text"
+                id="conteudo"
+                placeholder="Ex: HTML, CSS e JavaScript"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="turma" class="form-label">Turma/Semestre</label>
+              <input
+                type="text"
+                id="turma"
+                placeholder="Ex: 3º Semestre - TI"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="variacoes" class="form-label"
+                >Número de variações</label
+              >
+              <input type="number" id="variacoes" min="1" placeholder="Ex: 3" />
+            </div>
+
+            <div class="container-questoes">
+              <h5 class="subtitulo">Selecionar Questões</h5>
+              <div id="listaQuestoes"></div>
+            </div>
+
+            <div class="grupo-botoes">
+              <button type="submit" class="botao" onclick="gerarProva()">Salvar</button>
+              <button type="reset" class="botao botao-excluir">Excluir</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="container-ver-provas" class="container oculto">
+        <div class="container-provas">
+          <h3>Selecionar Provas</h3>
+          <div id="listaProvas"></div>  
+        </div>
+      </div>
     </div>
-  </div>
-
-  <div id="container-cadastrar-questoes" class="container oculto">
-    <h2 class="titulo">Cadastrar Questões</h2>
-    <form class="formulario" id="formulario">
-      
-      <div class="campo">
-        <label for="materia">Matéria</label>
-        <input type="text" id="materia" placeholder="Ex: Programação Web" />
-      </div>
-
-      <div class="campo">
-        <label for="conteudo">Conteúdo</label>
-        <input type="text" id="conteudo" placeholder="Ex: HTML, CSS, JavaScript" />
-      </div>
-
-      <div class="campo">
-        <label for="enunciado">Enunciado da Questão</label>
-        <textarea id="enunciado" placeholder="Digite o enunciado da questão..."></textarea>
-      </div>
-
-      <div class="campo">
-        <label>Opções de Resposta</label>
-
-        <div class="alternativa">
-            <input type="radio" name="correta" value="0">
-            <input type="text" class="opcaoInput" placeholder="Opção A">
-        </div>
-
-        <div class="alternativa">
-            <input type="radio" name="correta" value="1">
-            <input type="text" class="opcaoInput" placeholder="Opção B">
-        </div>
-
-        <div class="alternativa">
-            <input type="radio" name="correta" value="2">
-            <input type="text" class="opcaoInput" placeholder="Opção C">
-        </div>
-
-        <div class="alternativa">
-            <input type="radio" name="correta" value="3"> 
-            <input type="text" class="opcaoInput" placeholder="Opção D">
-        </div>
-
-      </div>
-
-      <button type="button" onclick="adicionarQuestao()">Adicionar Questão</button>
-      <button type="button" onclick="limparLocal()">Limpar Questões</button>
-    </form>
-  </div>
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
