@@ -1,47 +1,5 @@
 const container = document.getElementById("listaQuestoes");
 
-const opcoesMenu = document.querySelectorAll(".botao-link");
-
-opcoesMenu.forEach((botao, indice) => {
-  botao.addEventListener('click', () => {
-    switch (indice) {
-      case 0:
-        document.querySelector('#container-cadastrar-questoes').classList.remove('oculto');
-      break;
-      
-      case 1:
-        document.querySelector('#container-gerar-prova').classList.remove('oculto');
-        carregarQuestoes();
-      break;
-
-      case 2:
-        document.querySelector('#container-ver-provas').classList.remove('oculto');
-        carregarQuestoes();
-        carregarProvas();
-      break;
-
-      default:
-        alert('Ocorreu um erro ao carregar sua opção.');
-      break;
-    }
-
-    document.querySelector('#container-menu').classList.add('oculto');
-    document.querySelector('#back').classList.remove('oculto');
-  }
-
-  )
-});
-
-document.querySelector('#back').addEventListener('click', () => {
-  document.querySelector('#back').classList.add('oculto');
-
-  document.querySelector('#container-cadastrar-questoes').classList.add('oculto');
-  document.querySelector('#container-gerar-prova').classList.add('oculto');
-  document.querySelector('#container-ver-provas').classList.add('oculto');
-
-  document.querySelector('#container-menu').classList.remove('oculto');
-});
-
 function carregarQuestoes() {
   const questoes = JSON.parse(localStorage.getItem("questoes")) || [];
   container.innerHTML = "";
@@ -59,7 +17,7 @@ function carregarQuestoes() {
       
       const opcoesList = questao.opcoes.map((opcao, idx) => {
         const letra = String.fromCharCode(97 + idx);
-        const isCorreta = idx === questao.correta;
+        const isCorreta = idx === questao.indexCorreta;
         return `<li ${isCorreta ? 'style="font-weight:bold; color:green;"' : ''}>${letra}) ${opcao}</li>`;
       }).join("");
       
@@ -87,20 +45,20 @@ function toggleQuestion(checkboxId, cardId) {
 }
 
 function adicionarQuestao() {
-  const materia = document.getElementById("materia").value.trim();
-  const conteudo = document.getElementById("conteudo").value.trim();
-  const enunciado = document.getElementById("enunciado").value.trim();
-  const opcaoInputs = document.querySelectorAll(".opcaoInput");
-  const corretaIndex = document.querySelector('input[name="correta"]:checked');
+  const materia = document.getElementById("subject").value.trim();
+  const conteudo = document.getElementById("content").value.trim();
+  const enunciado = document.getElementById("quest-header").value.trim();
+  const opcaoInputs = document.querySelectorAll(".alternative-input");
+  const questCorreta = document.querySelector('input[name="isCorrect"]:checked');
 
-  if (!materia || !conteudo || !enunciado || !corretaIndex) {
+  if (!materia || !conteudo || !enunciado || !questCorreta) {
     alert("Preencha todos os campos e selecione a opção correta.");
   return;
   }
 
   const opcoes = Array.from(opcaoInputs).map(input => input.value.trim());
 
-  const correta = parseInt(corretaIndex.value);
+  const indexCorreta = parseInt(questCorreta.value);
 
   let questoes = JSON.parse(localStorage.getItem("questoes")) || [];
 
@@ -110,7 +68,7 @@ function adicionarQuestao() {
     conteudo,
     enunciado,
     opcoes,
-    correta
+    indexCorreta
   };
 
   questoes.push(novaQuestao);
@@ -118,7 +76,7 @@ function adicionarQuestao() {
 
   alert(`Questão ${novaQuestao.numeroQuestao} adicionada com sucesso!`);
 
-  document.getElementById("formulario").reset();
+  document.getElementById("quest-form").reset();
 }
 
 function gerarProva() {
@@ -178,7 +136,6 @@ function carregarProvas() {
   } else {
     variacoes.forEach((prova, indexProva) => {
       const provaCardId = `provaCard${indexProva + 1}`;
-      const checkboxProvaCardId = `pc${indexProva + 1}`;
 
       const provaCard = document.createElement("div");
       provaCard.className = "prova-card";
@@ -200,7 +157,7 @@ function carregarProvas() {
             ${questao.opcoes
               .map((opcao, idx) => {
                 const letra = String.fromCharCode(97 + idx);
-                const isCorreta = idx === questao.correta;
+                const isCorreta = idx === questao.indexCorreta;
                 return `<li ${isCorreta ? 'style="font-weight:bold; color:green;"' : ''}>${letra}) ${opcao}</li>`;
               })
               .join("")}

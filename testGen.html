@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerar Provas</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body onload="carregarQuestoes()">
+    <main>
+      <a class="back" href="./home.html"><</a>
+
+      <div id="container-gerar-prova" class="container">
+        <div class="card-body">
+          <h1 class="title">Corpo de Prova</h1>
+          <form>
+            <div class="form-group">
+              <label for="cabecalho" class="form-label">Cabeçalho</label>
+              <input
+                type="text"
+                id="cabecalho"
+                placeholder="Digite o cabeçalho da prova"
+              />
+            </div>
+            <div class="form-group">
+              <label for="cadeira" class="form-label"
+                >Cadeira da Faculdade</label
+              >
+              <select id="cadeira">
+                <option selected disabled>Selecione a cadeira</option>
+                <option>Análise e Desenvolvimento de Sistemas</option>
+                <option>Engenharia de Software</option>
+                <option>Sistemas de Informação</option>
+                <option>Redes de Computadores</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="materia" class="form-label">Matéria</label>
+              <select id="materia">
+                <option selected disabled>Selecione a matéria</option>
+                <option>Programação Web</option>
+                <option>Banco de Dados</option>
+                <option>Algoritmos</option>
+                <option>Infraestrutura</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="conteudo" class="form-label">Conteúdo</label>
+              <input
+                type="text"
+                id="conteudo"
+                placeholder="Ex: HTML, CSS e JavaScript"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="turma" class="form-label">Turma/Semestre</label>
+              <input
+                type="text"
+                id="turma"
+                placeholder="Ex: 3º Semestre - TI"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="variacoes" class="form-label"
+                >Número de variações</label
+              >
+              <input type="number" id="variacoes" min="1" placeholder="Ex: 3" />
+            </div>
+
+            <div class="container-questoes">
+              <h5 class="subtitulo">Selecionar Questões</h5>
+              <div id="listaQuestoes"></div>
+            </div>
+
+            <div class="grupo-botoes">
+              <button type="submit" class="botao" onclick="gerarProva()">
+                Salvar
+              </button>
+              <button type="reset" class="botao botao-excluir">Excluir</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
