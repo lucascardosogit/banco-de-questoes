@@ -18,14 +18,12 @@ main {
 }
 
 .container {
-  flex: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   max-width: 800px;
-  text-align: center;
   background-color: #ffffff;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 40px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -62,6 +60,12 @@ main {
   }
 }
 
+.subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
 button, .btn {
   padding: 15px 30px;
   font-size: 16px;
@@ -78,7 +82,7 @@ button, .btn {
   }
 }
 
-.clear, .botao-excluir {
+.clear {
   background-color: #dc3545;
   
   &:hover {
@@ -92,7 +96,7 @@ button, .btn {
   gap: 15px;
 }
 
-.form-template {
+.form-container {
   display: flex;
   flex-direction: column;
 
@@ -110,7 +114,7 @@ button, .btn {
     margin-bottom: 10px;
   }
 
-  input[type="text"], textarea {
+  input[type="text"], input[type="number"], textarea, select {
     font-size: 1rem;
     width: 100%;
     padding: 10px 14px;
@@ -123,6 +127,45 @@ button, .btn {
       outline: none;
     }
   }
+
+  button {
+    margin-top: 20px;
+  }
+}
+
+.quest-container {
+  margin: 20px;
+
+  .correct-alternative {
+    font-weight: bold;
+    color:green;
+  }
+
+  .question-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 12px;
+    background-color: #f9f9f9;
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .quest-matter-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+
+      p {
+        margin: 0;
+        font-size: 12px;
+      }
+    }
+  }
 }
 
 textarea {
@@ -130,12 +173,13 @@ textarea {
   resize: vertical;
 }
 
-/* CÓDIGO ATUALIZADO */
-
-.grupo-botoes {
+.btn-group {
   display: flex;
   justify-content: space-around;
 }
+
+/* CÓDIGO ATUALIZADO */
+
 
 .campo {
   display: flex;
@@ -173,27 +217,10 @@ button[type="button"]:hover {
   }
 }
 
-.subtitulo {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  font-weight: bold;
-}
-
-.form-label {
+/* .form-label {
   font-weight: 500;
   display: block;
   margin-bottom: 6px;
-}
-
-/* input[type="text"],
-input[type="number"],
-select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-bottom: 16px;
-  font-size: 1rem;
 } */
 
 .form-check {
@@ -226,13 +253,7 @@ select {
   }
 }
 
-.question-card, .prova-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 16px;
-  margin-top: 12px;
-  background-color: #f9f9f9;
-}
+
 
 .cabecalho {
   display: flex;
@@ -247,12 +268,6 @@ ul {
   li {
     margin-bottom: 4px;
   }
-}
-
-.question-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 input[type="checkbox"][role="switch"] {

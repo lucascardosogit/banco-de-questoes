@@ -6,19 +6,20 @@
     <title>Cadastrar Questões</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
+  <body onload="questRegLoader()">
     <main>
       <a class="back" href="./home.html"><</a>
 
-      <div id="container-cadastrar-questoes" class="container">
+      <div id="container-quest-reg" class="container">
         <h1 class="title">Cadastro de Questões</h1>
-        <form class="form-template" id="quest-form">
+        <form class="form-container" id="quest-form">
 
-          <label for="subject">Matéria</label>
-          <input type="text" id="subject" placeholder="Ex: Programação Web" />
+          <label for="quest-matter">Matéria</label>
+          <select name="quest-matter" id="quest-matter"></select>
 
-          <label for="content">Conteúdo</label>
-          <input type="text" id="content" placeholder="Ex: HTML, CSS, JavaScript"/>
+          <label for="quest-content">Conteúdo</label>
+          <select name="quest-content" id="quest-content"></select>
+
 
           <label for="quest-header">Enunciado da Questão</label>
           <textarea id="quest-header" placeholder="Digite o enunciado da questão..." ></textarea>
@@ -26,25 +27,25 @@
           <p>Alternativas</p>
           <div class="alternative">
             <input type="radio" name="isCorrect" value="0" />
-            <input type="text" class="alternative-input" placeholder="Alternativa A" />
+            <input id="alternative-1" type="text" class="alternative-input" placeholder="Alternativa A" />
           </div>
 
           <div class="alternative">
             <input type="radio" name="isCorrect" value="1" />
-            <input type="text" class="alternative-input" placeholder="Alternativa B" />
+            <input id="alternative-2" type="text" class="alternative-input" placeholder="Alternativa B" />
           </div>
 
           <div class="alternative">
             <input type="radio" name="isCorrect" value="2" />
-            <input type="text" class="alternative-input" placeholder="Alternativa C" />
+            <input id="alternative-3" type="text" class="alternative-input" placeholder="Alternativa C" />
           </div>
 
           <div class="alternative">
             <input type="radio" name="isCorrect" value="3" />
-            <input type="text" class="alternative-input" placeholder="Alternativa D" />
+            <input id="alternative-4" type="text" class="alternative-input" placeholder="Alternativa D" />
           </div>
 
-          <button type="button" onclick="adicionarQuestao()">Adicionar Questão</button>
+          <button type="button" onclick="setNewQuest()">Adicionar Questão</button>
 
         </form>
       </div>
