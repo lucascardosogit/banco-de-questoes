@@ -30,11 +30,11 @@ function setNewQuest() {
   const content = document.getElementById("quest-content").value.trim();
   const questHeader = document.getElementById("quest-header").value.trim();
   const alternativeInputs = document.querySelectorAll(".alternative-input");
-  const correctAltIndex = document.querySelector('input[name="isCorrect"]:checked').value;
+  const correctAltIndex = (document.querySelector('input[name="isCorrect"]:checked')).value;
 
-  if (!matter || !content || !questHeader || !alternativeInputs) {
-    alert("Preencha todos os campos e selecione a opção correta.");
-  return;
+  if (!matter || !content || !questHeader || !alternativeInputs || !correctAltIndex) {
+    alert("Preencha todos os campos da questão e selecione qual a alternativa correta.");
+    return;
   }
 
   const alternatives = Array.from(alternativeInputs).map(alt => alt.value.trim());
