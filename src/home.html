@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bQuest</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="main-nav">
+        <div aria-hidden="true">
+          <a href="./home.html"><img src="/public/img/icon-svg.svg" alt="Logo svg"></a>
+        </div>
+        <div aria-hidden="true">
+          <button type="button" onclick="clearLocalStorage()"><img src="/public/img/delete-svg.svg" alt="Delete button"></button>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="./questReg.html" ><img src="/public/img/add-svg.svg" alt="Add svg"> Cadastrar Questões</a></li>
+          <li><a href="./testGen.html" ><img src="/public/img/stack-svg.svg" alt="Stack svg"> Gerar Provas</a></li>
+          <li><a href="./testView.html" ><img src="/public/img/test-svg.svg" alt="Test svg"> Ver Provas</a></li>
+        </ul>
+        <footer>
+          <p>&copy Lucas Cardoso 2025.</p>
+        </footer>
+      </nav>
+      
+      <div id="container-menu" class="container">
+        <h1 class="title">Menu Principal</h1>
+        <div class="menu">
+          <a href="./questReg.html" class="btn">Cadastrar Questões</a>
+          <a href="./testGen.html" class="btn">Gerar Provas</a>
+          <a href="./testView.html" class="btn">Ver Provas</a>
+          <a class="btn clear" onclick="clearLocalStorage()">Limpar Questões</a>
+        </div>
+      </div>
+    </main>
+    <script src="/script.js"></script>
+  </body>
+</html>

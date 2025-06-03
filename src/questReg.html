@@ -3,12 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastrar Questões</title>
-    <link rel="stylesheet" href="./style.css" />
+    <title>bQuest</title>
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body onload="questRegLoader()">
+    <header>
+      <nav class="main-nav">
+        <div aria-hidden="true">
+          <a href="./home.html"><img src="/public/img/icon-svg.svg" alt="Logo svg"></a>
+        </div>
+        <div aria-hidden="true">
+          <button type="button" onclick="clearLocalStorage()"><img src="/public/img/delete-svg.svg" alt="Delete button"></button>
+        </div>
+      </nav>
+    </header>
+    
     <main>
-      <a class="back" href="./home.html"><</a>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="./questReg.html" ><img src="/public/img/add-svg.svg" alt="Add svg"> Cadastrar Questões</a></li>
+          <li><a href="./testGen.html" ><img src="/public/img/stack-svg.svg" alt="Stack svg"> Gerar Provas</a></li>
+          <li><a href="./testView.html" ><img src="/public/img/test-svg.svg" alt="Test svg"> Ver Provas</a></li>
+        </ul>
+        <footer>
+          <p>&copy Lucas Cardoso 2025.</p>
+        </footer>
+      </nav>
 
       <div id="container-quest-reg" class="container">
         <h1 class="title">Cadastro de Questões</h1>
@@ -50,6 +70,6 @@
         </form>
       </div>
     </main>
-    <script src="script.js"></script>
+    <script src="/script.js"></script>
   </body>
 </html>
