@@ -88,6 +88,7 @@ body {
 }
 
 .container {
+  margin: 1em;
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
@@ -96,22 +97,14 @@ body {
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #0a9fe4;
-  text-align: center;
+  color: #000;
   position: relative;
   padding-bottom: 10px;
-
-  &::after {
-    content: "";
-    width: 60px;
-    height: 4px;
-    background-color: #007bff;
-    display: block;
-    margin: 10px auto 0 auto;
-    border-radius: 2px;
-  }
+  width: fit-content;
+  left: 2%;
+  top: 2%;
 }
 
 .subtitle {
@@ -144,10 +137,81 @@ body {
   }
 }
 
-#container-menu .menu {
+#container-dashboard {  
+  .dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+    margin: 5rem;
+    
+    .dashboard-card {
+      text-align: center;
+      padding: 20px;
+      border-radius: 12px;
+      background-color: #e0edf7;
+
+      .p-number-card {
+        font-size: 2rem;
+        font-weight: bolder;
+        color: #0056b3;
+      }
+    }
+
+    button {
+      order: 1;
+      grid-column: 1 / span 3;
+      background-color: #0056b3;
+      padding: 1px;
+      border-style: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  }
+}
+
+#hidden-menu {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+  position: absolute;
+  width: fit-content;
+  border-radius: 12px;
+  padding: 80px 40px;
+  left: 45%;
+  top: -100%;
+
+  label, select, input {
+    margin: 20px 0 0 0;
+    width: 100%;
+  }
+}
+
+#hidden-close {
+  top: 2%;
+  left: 90%;
+  position: absolute;
+  border-radius: 5px;
+
+  &:hover {
+      transition: .3s ease-in-out;
+      background-color: #dc3545;
+    }
+
+    &:not(:hover) {
+      transition: .3s ease-in-out;
+      background-color: transparent;
+    }
+}
+
+.hidden-animation-open {
+  animation-direction: alternate;
+  animation: moveDivDown .7s forwards;
+}
+
+.hidden-animation-close {
+  animation-direction: alternate;
+  animation: moveDivUp 1s forwards;
 }
 
 .form-container {
@@ -170,7 +234,6 @@ body {
 
   input[type="text"], input[type="number"], textarea, select {
     font-size: 1rem;
-    /* width: 80%; */
     padding: 10px 14px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -231,6 +294,30 @@ textarea {
 .btn-group {
   display: flex;
   justify-content: space-around;
+}
+
+@keyframes moveDivDown {
+  0% {
+    top: -100%;
+  }
+
+  100% {
+    top: 10%;
+  }
+}
+
+@keyframes moveDivUp {
+  0% {
+    top: 10%;
+  }
+
+  30% {
+    top: 20%;
+  }
+
+  100% {
+    top: -100%;
+  }
 }
 
 /* CÓDIGO ATUALIZADO */

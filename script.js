@@ -1,15 +1,9 @@
 let questions = JSON.parse(localStorage.getItem("questions")) || [];
+let matters = JSON.parse(localStorage.getItem("matters")) || ["Programação Web", "Banco de Dados", "Algoritmos"];
+let contents = JSON.parse(localStorage.getItem("contents")) || ["HTML", "CSS", "JavaScript"];
+let courses = JSON.parse(localStorage.getItem("courses")) || ["Análise e Desenvolvimento de Sistemas", "Engenharia de Software", "Sistemas de Informação", "Redes de Computadores"];
 
-const matters = ["Programação Web", "Banco de Dados", "Algoritmos"];
-const contents = ["HTML", "CSS", "JavaScript"];
-const course = ["Análise e Desenvolvimento de Sistemas", "Engenharia de Software", "Sistemas de Informação", "Redes de Computadores"];
-
-// Lógica página de cadastro de questões
-function questRegLoader() {
-  optionsLoad('#quest-matter', matters, 'Selecione uma matéria');
-  optionsLoad('#quest-content', contents, 'Selecione um conteúdo');
-}
-
+// Funções genéricas
 function optionsLoad(position, arrayOfContent, placeholderMsg) {
   const element = document.querySelector(position);
 
@@ -18,14 +12,111 @@ function optionsLoad(position, arrayOfContent, placeholderMsg) {
   elementPreSet.selected = true;
   elementPreSet.disabled = true;
   element.appendChild(elementPreSet)
-  arrayOfContent.forEach((el) => {
+  arrayOfContent.forEach((el, index) => {
     let tempElement = document.createElement("option");
     tempElement.text = el.toString();
+    tempElement.value = index;
     element.appendChild(tempElement);
   })
 }
 
+function syncLocalStorage() {
+  questions = JSON.parse(localStorage.getItem("questions")) || [];
+  matters = JSON.parse(localStorage.getItem("matters")) || ["Programação Web", "Banco de Dados", "Algoritmos"];
+  contents = JSON.parse(localStorage.getItem("contents")) || ["HTML", "CSS", "JavaScript"];
+  courses = JSON.parse(localStorage.getItem("courses")) || ["Análise e Desenvolvimento de Sistemas", "Engenharia de Software", "Sistemas de Informação", "Redes de Computadores"];
+}
+
+function clearLocalStorage() {
+  localStorage.clear();
+  alert("Banco de questões zerado com sucesso!");
+  location.reload();
+}
+
+// Lógica página home
+function homeLoader() {
+  syncLocalStorage();
+  cardLoader(matters, 'Matérias', '.dashboard');
+  cardLoader(contents, 'Conteúdos', '.dashboard');
+  cardLoader(courses, 'Cursos', '.dashboard');
+  optionsLoad('#type-content', ["Matéria", "Conteúdo", "Curso"], 'Adicionar um(a) novo(a)...');
+}
+
+function typeOfContentAdd() {
+  event.preventDefault();
+  syncLocalStorage();
+  const objIndex = parseInt(document.getElementById("type-content").value);
+  const objValue = document.getElementById("value-content").value;
+  
+  switch(objIndex) {
+    case 0:
+      matters.push(objValue);
+      localStorage.setItem("matters", JSON.stringify(matters));
+      alert("Matéria adicionada com sucesso!");
+      cardLoader(matters, 'Matérias', '.dashboard', true);
+    break;
+    case 1:
+      contents.push(objValue);
+      localStorage.setItem("contents", JSON.stringify(contents));
+      alert("Conteúdo adicionado com sucesso!");
+      cardLoader(contents, 'Conteúdos', '.dashboard', true);
+    break;
+    case 2:
+      courses.push(objValue);
+      localStorage.setItem("courses", JSON.stringify(courses));
+      alert("Curso adicionado com sucesso!");
+      cardLoader(courses, 'Cursos', '.dashboard', true);
+    break;
+    default:
+      console.log("Error on select data.");
+    break;
+  }
+}
+
+function cardLoader(array, text, position, replace = false) {
+  const cardContainer = document.querySelector(position);
+
+  const cardDiv = document.createElement("div");
+
+  
+  if(replace) {
+    let temp = document.getElementById(`${text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")}-card`);
+    
+    temp.firstChild.textContent = `${array.length}`;
+    return;
+  }
+  
+  cardDiv.id = `${text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")}-card`;
+  cardDiv.className = "dashboard-card"
+  cardDiv.innerHTML = 
+    `<p class="p-number-card">${array.length}</p>
+    <p class="p-description-card">${text}</p>`;
+  cardContainer.appendChild(cardDiv);
+}
+
+document.getElementById('dashboard-modify').addEventListener("click", () => {
+  let tempMenu = document.getElementById('hidden-menu');
+
+  tempMenu.classList.add("hidden-animation-open");
+  tempMenu.classList.remove("hidden-animation-close");
+});
+
+document.getElementById('hidden-close').addEventListener("click", () => {
+  let tempMenu = document.getElementById('hidden-menu');
+
+  tempMenu.classList.add("hidden-animation-close");
+  tempMenu.classList.remove("hidden-animation-open");
+});
+
+// Lógica página cadastro de questões
+function questRegLoader() {
+  syncLocalStorage();
+  optionsLoad('#quest-matter', matters, 'Selecione uma matéria');
+  optionsLoad('#quest-content', contents, 'Selecione um conteúdo');
+}
+
 function setNewQuest() {
+  syncLocalStorage();
   const matter = document.getElementById("quest-matter").value.trim();
   const content = document.getElementById("quest-content").value.trim();
   const questHeader = document.getElementById("quest-header").value.trim();
@@ -61,12 +152,14 @@ function setNewQuest() {
 
 function testGenLoader() {
   questionsLoader();
-  optionsLoad('#test-course', course, 'Selecione a cadeira');
+  syncLocalStorage();
+  optionsLoad('#test-course', courses, 'Selecione a cadeira');
   optionsLoad('#test-matter', matters, 'Selecione uma matéria');
   optionsLoad('#test-content', contents, 'Selecione um conteúdo');
 }
 
 function questionsLoader() {
+  syncLocalStorage();
   const questionsContainer = document.getElementById("quest-list-container");
 
   questions = JSON.parse(localStorage.getItem("questions")) || [];
@@ -129,8 +222,6 @@ function gerarProva() {
   }
 
   const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-  console.log(checkboxes);
-
 
   if(checkboxes.length === 0) {
     alert("Selecione pelo menos uma questão para gerar a prova.");
@@ -212,9 +303,4 @@ function carregarProvas() {
       containerProvas.appendChild(provaCard);
     });
   }
-}
-
-function clearLocalStorage() {
-  localStorage.clear();
-  alert("Banco de questões zerado com sucesso!");
 }

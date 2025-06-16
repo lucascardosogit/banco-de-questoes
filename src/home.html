@@ -6,13 +6,13 @@
     <title>bQuest</title>
     <link rel="stylesheet" href="/style.css" />
   </head>
-  <body>
+  <body onload="homeLoader()">
     <header>
       <nav class="main-nav">
-        <div aria-hidden="true">
+        <div>
           <a href="./home.html"><img src="/public/img/icon-svg.svg" alt="Logo svg"></a>
         </div>
-        <div aria-hidden="true">
+        <div>
           <button type="button" onclick="clearLocalStorage()"><img src="/public/img/delete-svg.svg" alt="Delete button"></button>
         </div>
       </nav>
@@ -30,13 +30,24 @@
         </footer>
       </nav>
       
-      <div id="container-menu" class="container">
-        <h1 class="title">Menu Principal</h1>
-        <div class="menu">
-          <a href="./questReg.html" class="btn">Cadastrar Questões</a>
-          <a href="./testGen.html" class="btn">Gerar Provas</a>
-          <a href="./testView.html" class="btn">Ver Provas</a>
-          <a class="btn clear" onclick="clearLocalStorage()">Limpar Questões</a>
+      <div id="container-dashboard" class="container">
+        <h1 class="title">Overview</h1>
+        <div class="dashboard">
+          <button id="dashboard-modify"><img src="/public/img/add-button-svg.svg" alt="Add button svg"></button>
+        </div>
+      </div>
+
+      <div id="hidden-blur">
+        <div id="hidden-menu" class="container">
+          <img id="hidden-close" src="/public/img/close-svg.svg" alt="Close container">
+          <h2 class="title">Adicionar</h2>
+          <form class="form-container">
+            <label for="type-content">Tipo do conteúdo</label>
+            <select name="type-content" id="type-content"></select>
+            <label for="value-content">Descrição</label>
+            <input type="text" name="value-content" id="value-content" placeholder="Exemplo">
+            <button class="btn" onclick="typeOfContentAdd()">Confirmar</button>
+          </form>
         </div>
       </div>
     </main>
