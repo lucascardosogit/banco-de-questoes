@@ -40,6 +40,20 @@ function homeLoader() {
   cardLoader(contents, 'Conteúdos', '.dashboard');
   cardLoader(courses, 'Cursos', '.dashboard');
   optionsLoad('#type-content', ["Matéria", "Conteúdo", "Curso"], 'Adicionar um(a) novo(a)...');
+  
+  document.getElementById('dashboard-modify').addEventListener("click", () => {
+    let tempMenu = document.getElementById('hidden-menu');
+
+    tempMenu.classList.add("hidden-animation-open");
+    tempMenu.classList.remove("hidden-animation-close");
+  });
+
+  document.getElementById('hidden-close').addEventListener("click", () => {
+    let tempMenu = document.getElementById('hidden-menu');
+
+    tempMenu.classList.add("hidden-animation-close");
+    tempMenu.classList.remove("hidden-animation-open");
+  });
 }
 
 function typeOfContentAdd() {
@@ -47,7 +61,13 @@ function typeOfContentAdd() {
   syncLocalStorage();
   const objIndex = parseInt(document.getElementById("type-content").value);
   const objValue = document.getElementById("value-content").value;
-  
+  document.getElementById('hidden-form').reset();
+
+  if(!objIndex && !objValue) {
+    alert("Por favor preencha ambos os campos!");
+    return;
+  }
+
   switch(objIndex) {
     case 0:
       matters.push(objValue);
@@ -94,20 +114,6 @@ function cardLoader(array, text, position, replace = false) {
   cardContainer.appendChild(cardDiv);
 }
 
-document.getElementById('dashboard-modify').addEventListener("click", () => {
-  let tempMenu = document.getElementById('hidden-menu');
-
-  tempMenu.classList.add("hidden-animation-open");
-  tempMenu.classList.remove("hidden-animation-close");
-});
-
-document.getElementById('hidden-close').addEventListener("click", () => {
-  let tempMenu = document.getElementById('hidden-menu');
-
-  tempMenu.classList.add("hidden-animation-close");
-  tempMenu.classList.remove("hidden-animation-open");
-});
-
 // Lógica página cadastro de questões
 function questRegLoader() {
   syncLocalStorage();
@@ -132,7 +138,7 @@ function setNewQuest() {
 
   const newQuest = {
     questNumberID: questions.length + 1,
-    matter,
+    matters,
     content,
     questHeader,
     alternativesArray: alternatives,
@@ -175,7 +181,7 @@ function questionsLoader() {
       questCard.className = "question-card";
       questCard.id = questCardID;
       
-      const alternativeList = quest.alternativesArray.map((alt, index) => {
+      const questionAlternatives = quest.alternativesArray.map((alt, index) => {
         const altID = String.fromCharCode(97 + index);
 
         if(parseInt(quest.correctAltIndex) === index) {
@@ -185,6 +191,7 @@ function questionsLoader() {
         }
       }).join("");
       
+      console.log(quest)
       questCard.innerHTML = 
       `<div class="question-header">
         <div class="quest-matter-content">
@@ -194,7 +201,7 @@ function questionsLoader() {
         <input type="checkbox" role="switch" id="${questCardCheckboxID}" onclick="toggleQuestion('${questCardCheckboxID}', '${questCardID}')">
       </div>
       <p>${quest.questHeader}</p>
-      <ul>${alternativeList}</ul>`;
+      <ul>${questionAlternatives}</ul>`;
       
       questionsContainer.appendChild(questCard);
     });
