@@ -4,19 +4,41 @@ let contents = JSON.parse(localStorage.getItem("contents")) || ["HTML", "CSS", "
 let courses = JSON.parse(localStorage.getItem("courses")) || ["Análise e Desenvolvimento de Sistemas", "Engenharia de Software", "Sistemas de Informação", "Redes de Computadores"];
 
 // Funções genéricas
-function optionsLoad(position, arrayOfContent, placeholderMsg) {
+function inputOptionsLoad(position, arrayOfContent, placeholderMsg) {
   const element = document.querySelector(position);
 
   const elementPreSet = document.createElement("option");
   elementPreSet.text =  placeholderMsg.toString();
   elementPreSet.selected = true;
   elementPreSet.disabled = true;
-  element.appendChild(elementPreSet)
+  element.appendChild(elementPreSet);
+
   arrayOfContent.forEach((el, index) => {
     let tempElement = document.createElement("option");
+
     tempElement.text = el.toString();
     tempElement.value = index;
+
     element.appendChild(tempElement);
+  })
+}
+
+function checkboxOptionsLoad(position, arrayOfContent) {
+  const element = document.querySelector(position);
+
+  arrayOfContent.forEach((el) => {
+    let tempDiv = document.createElement("div");
+
+    let tempCheckbox = document.createElement("input");
+    tempCheckbox.type = 'checkbox';
+    tempCheckbox.value = el.toLowerCase().trim();
+    
+    let tempLabel = document.createElement("p");
+    tempLabel.innerHTML = el;
+
+    tempDiv.appendChild(tempCheckbox);
+    tempDiv.appendChild(tempLabel);
+    element.appendChild(tempDiv);
   })
 }
 
@@ -36,10 +58,10 @@ function clearLocalStorage() {
 // Lógica página home
 function homeLoader() {
   syncLocalStorage();
-  cardLoader(matters, 'Matérias', '.dashboard');
-  cardLoader(contents, 'Conteúdos', '.dashboard');
+  cardLoader(matters, 'Disciplinas', '.dashboard');
+  cardLoader(contents, 'Assuntos', '.dashboard');
   cardLoader(courses, 'Cursos', '.dashboard');
-  optionsLoad('#type-content', ["Matéria", "Conteúdo", "Curso"], 'Adicionar um(a) novo(a)...');
+  inputOptionsLoad('#type-content', ["Disciplina", "Assunto", "Curso"], 'Adicionar um(a) novo(a)...');
   
   document.getElementById('dashboard-modify').addEventListener("click", () => {
     let tempMenu = document.getElementById('hidden-menu');
@@ -72,14 +94,14 @@ function typeOfContentAdd() {
     case 0:
       matters.push(objValue);
       localStorage.setItem("matters", JSON.stringify(matters));
-      alert("Matéria adicionada com sucesso!");
-      cardLoader(matters, 'Matérias', '.dashboard', true);
+      alert("Disciplina adicionada com sucesso!");
+      cardLoader(matters, 'Disciplinas', '.dashboard', true);
     break;
     case 1:
       contents.push(objValue);
       localStorage.setItem("contents", JSON.stringify(contents));
-      alert("Conteúdo adicionado com sucesso!");
-      cardLoader(contents, 'Conteúdos', '.dashboard', true);
+      alert("Assunto adicionado com sucesso!");
+      cardLoader(contents, 'Assunto(s)', '.dashboard', true);
     break;
     case 2:
       courses.push(objValue);
@@ -117,8 +139,8 @@ function cardLoader(array, text, position, replace = false) {
 // Lógica página cadastro de questões
 function questRegLoader() {
   syncLocalStorage();
-  optionsLoad('#quest-matter', matters, 'Selecione uma matéria');
-  optionsLoad('#quest-content', contents, 'Selecione um conteúdo');
+  inputOptionsLoad('#quest-matter', matters, 'Selecione uma disciplina');
+  checkboxOptionsLoad('#quest-content', contents, 'Selecione um ou mais assuntos');
 }
 
 function setNewQuest() {
@@ -159,9 +181,9 @@ function setNewQuest() {
 function testGenLoader() {
   questionsLoader();
   syncLocalStorage();
-  optionsLoad('#test-course', courses, 'Selecione a cadeira');
-  optionsLoad('#test-matter', matters, 'Selecione uma matéria');
-  optionsLoad('#test-content', contents, 'Selecione um conteúdo');
+  inputOptionsLoad('#test-course', courses, 'Selecione a cadeira');
+  inputOptionsLoad('#test-matter', matters, 'Selecione uma disciplina');
+  inputOptionsLoad('#test-content', contents, 'Selecione um assunto');
 }
 
 function questionsLoader() {
@@ -191,12 +213,11 @@ function questionsLoader() {
         }
       }).join("");
       
-      console.log(quest)
       questCard.innerHTML = 
       `<div class="question-header">
         <div class="quest-matter-content">
-          <p>Matéria: ${quest.matter}</p>
-          <p>Conteúdo: ${quest.content}</p>
+          <p>Disciplina: ${quest.matter}</p>
+          <p>Assunto(s): ${quest.content}</p>
         </div>
         <input type="checkbox" role="switch" id="${questCardCheckboxID}" onclick="toggleQuestion('${questCardCheckboxID}', '${questCardID}')">
       </div>
