@@ -67,7 +67,7 @@ body {
   min-width: fit-content;
   max-width: 400px;
   opacity: 80%;
-  min-height: calc(100vh - 57px);
+  min-height: calc(100vh - 58px);
   background-color: #3561E6;
 
   ul {
@@ -158,6 +158,7 @@ textarea {
 #container-home {
   display: flex;
   justify-content: space-around;
+  flex: 1;
 
   .menu-options {
     display: flex;
@@ -174,10 +175,15 @@ textarea {
       flex-direction: column;
       align-items: center;
       background-color: #a0c1e6;
-      padding: 40px 100px;
+      padding: 40px 20px;
       border-radius: 20px;
-      width: fit-content;
+      /* text-align: justify; */
+      width: 17em;
       transition: background-color 0.3s ease;
+
+      h2 {
+        font-size: 20px;
+      }
 
       img {
         width: 100px;
