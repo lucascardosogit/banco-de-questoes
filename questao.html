@@ -6,14 +6,11 @@
     <title>Banco de Questões</title>
     <link rel="stylesheet" href="/style.css" />
   </head>
-  <body onload="questRegLoader()">
+  <body>
     <header>
       <nav class="main-nav">
-        <div aria-hidden="true">
-          <a href="./index.html"><img src="/public/img/icon-svg.svg" alt="Logo svg">Home</a>
-        </div>
-        <div aria-hidden="true">
-          <button type="button" onclick="clearLocalStorage()"><img src="/public/img/delete-svg.svg" alt="Delete button"></button>
+        <div>
+          <a href="./index.html"><img src="/public/img/home-icon.svg" alt="Home icon svg">Home</a>
         </div>
       </nav>
     </header>
@@ -21,9 +18,10 @@
     <main>
       <nav class="sidebar-nav">
         <ul>
-          <li><a href="./questao.html" ><img src="/public/img/add-svg.svg" alt="Add svg"> Cadastrar questão</a></li>
-          <li><a href="./prova.html" ><img src="/public/img/stack-svg.svg" alt="Stack svg"> Gerar provas</a></li>
-          <li><a href="./provas.html" ><img src="/public/img/test-svg.svg" alt="Test svg"> Ver Provas</a></li>
+          <li><a href="./questao.html" ><img src="/public/img/add-svg.svg" alt="Add svg">Cadastrar questão</a></li>
+          <li><a href="./questoes.html" ><img src="/public/img/database-quest.svg" alt="Add svg">Banco de Questões</a></li>
+          <li><a href="./prova.html" ><img src="/public/img/test-icon.svg" alt="Stack svg">Cadastrar prova</a></li>
+          <li><a href="./provas.html" ><img src="/public/img/tests-area-icon.svg" alt="Test svg">Página de Provas</a></li>
         </ul>
         <footer>
           <p>&copy; Lucas Cardoso 2025.</p>
@@ -33,14 +31,14 @@
       <div id="container-quest-reg" class="container">
         <h1 class="title">Cadastro de Questões</h1>
         <form class="form-container" id="quest-form">
-          <label for="quest-matter">Disciplina</label>
-          <select name="quest-matter" id="quest-matter"></select>
+          <label for="quest-course">Disciplina</label>
+          <input type="text" name="quest-course" id="quest-course" placeholder="Disciplina A" required></input>
 
-          <p>Assunto</p>
-          <div id="quest-content"></div>
+          <label for="quest-subjects">Assunto (s)</label>
+          <input type="text" name="quest-subjects" id="quest-subjects" placeholder="Assunto1, assunto2..." required></input>
 
-          <label for="quest-header">Enunciado da Questão</label>
-          <textarea id="quest-header" placeholder="Digite o enunciado da questão..." ></textarea>
+          <label for="quest-header">Título da Questão</label>
+          <textarea id="quest-header" placeholder="Digite o título da questão..." required></textarea>
 
           <p>Alternativas</p>
           <div class="alternative">
@@ -63,10 +61,17 @@
             <input id="alternative-4" type="text" class="alternative-input" placeholder="Alternativa D" />
           </div>
 
-          <button type="button" onclick="setNewQuest()">Adicionar Questão</button>
+          <div class="alternative">
+            <input type="radio" name="isCorrect" value="4" />
+            <input id="alternative-5" type="text" class="alternative-input" placeholder="Alternativa E" />
+          </div>
+
+          <div class="quest-actions">
+            <button type="button" onclick="setQuest()">Cadastrar</button>
+          </div>
         </form>
       </div>
     </main>
-    <script src="./js/questao.js"></script>
+    <script type="module" src="./js/questao.js"></script>
   </body>
 </html>

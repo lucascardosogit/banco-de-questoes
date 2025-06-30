@@ -6,14 +6,11 @@
     <title>Banco de Questões</title>
     <link rel="stylesheet" href="/style.css" />
   </head>
-  <body onload="carregarProvas()">
+  <body>
     <header>
       <nav class="main-nav">
-        <div aria-hidden="true">
-          <a href="./index.html"><img src="/public/img/icon-svg.svg" alt="Logo svg">Home</a>
-        </div>
-        <div aria-hidden="true">
-          <button type="button" onclick="clearLocalStorage()"><img src="/public/img/delete-svg.svg" alt="Delete button"></button>
+        <div>
+          <a href="./index.html"><img src="/public/img/home-icon.svg" alt="Home icon svg">Home</a>
         </div>
       </nav>
     </header>
@@ -21,19 +18,21 @@
     <main>
       <nav class="sidebar-nav">
         <ul>
-          <li><a href="./questao.html" ><img src="/public/img/add-svg.svg" alt="Add svg"> Cadastrar questão</a></li>
-          <li><a href="./prova.html" ><img src="/public/img/stack-svg.svg" alt="Stack svg"> Gerar provas</a></li>
-          <li><a href="./provas.html" ><img src="/public/img/test-svg.svg" alt="Test svg"> Ver Provas</a></li>
+          <li><a href="./questao.html" ><img src="/public/img/add-svg.svg" alt="Add svg">Cadastrar questão</a></li>
+          <li><a href="./questoes.html" ><img src="/public/img/database-quest.svg" alt="Add svg">Banco de Questões</a></li>
+          <li><a href="./prova.html" ><img src="/public/img/test-icon.svg" alt="Stack svg">Cadastrar prova</a></li>
+          <li><a href="./provas.html" ><img src="/public/img/tests-area-icon.svg" alt="Test svg">Página de Provas</a></li>
         </ul>
         <footer>
           <p>&copy; Lucas Cardoso 2025.</p>
         </footer>
       </nav>
 
-      <div id="container-test-view" class="container">
-        <div class="container">
-          <h1>Selecionar Provas</h1>
-          <div id="tests-list"></div>
+      <div class="container">
+        <h1 class="title">Provas</h1>
+        <a class="btn" href="./prova.html"><img src="/public/img/add-svg.svg" alt="Add new test button">Nova Prova</a>
+        <div class="test-container">
+          <div id="tests-list-container"></div>
         </div>
       </div>
     </main>
