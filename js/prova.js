@@ -125,7 +125,11 @@ async function loadQuestions() {
     
     if(!course) {
         alert("O campo 'Disciplina' não pode estar vazio!");
+        document.getElementById("test-course").style.border = '2px solid red';
+
         return;
+    } else {
+        document.getElementById("test-course").style.border = '2px solid red';
     }
     
     ulContainer.innerHTML = `<li>Carregando questões...</li>`;
