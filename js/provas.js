@@ -1,45 +1,51 @@
-import {getQuestions} from './api.js';
+import {getTests, redirect} from './api.js';
 
 async function testsCardLoader() {
     const element = document.getElementById("tests-list-container");
     element.appendChild(document.createElement("ul"));
-    element.firstChild.innerHTML = `<li>Carregando questões...</li>`;
+    element.firstChild.innerHTML = `<li>Carregando provas...</li>`;
 
     try {
-        const data = await getQuestions();
+        const data = await getTests();
 
         if(data.length === 0) {
-            element.firstChild.innerHTML = `<li>Não há questões registradas em banco.</li>`;
+            element.firstChild.innerHTML = `<li>Não há provas registradas em banco.</li>`;
             return;
         } else {
             element.querySelector("li:first-of-type").remove();
         }
 
-        data.forEach((data_quest) => {
-            const tempCard = document.createElement("li");
-            tempCard.appendChild(document.createElement("div"));
-            tempCard.classList.add("question-card");
+        data.forEach((data_test) => {
+            console.log(data_test);
+            const liTempCard = document.createElement("li");
+            const liDivTempCard = document.createElement("div");
+            liTempCard.appendChild(liDivTempCard);
+            liDivTempCard.classList.add("test-card");
 
-            tempCard.innerHTML = `
-            <div class="quest-actions edit">
-                <button type="button" onclick="urlRedirectById(${data_quest.idQuestao})"><img src="/public/img/edit-icon.svg" alt="Edit quest icon"></button>
-            </div>
-            <p>${data_quest.idQuestao}) ${data_quest.titulo}</p>
-            <p>Disciplina: ${data_quest.disciplina}</p>
-            <p class="question-header">Assuntos: ${(data_quest.assuntos).join(', ')}</p>
+
+            liDivTempCard.innerHTML = `
+            <div class="test-actions edit"></div>
+            <p>${data_test.idProva}) ${data_test.titulo}</p>
+            <p>Disciplina: ${data_test.disciplina}</p>
+            <p class="categories">Quantidade de Questões: ${data_test.quantidadeQuestoes}</p>
             `;
-            element.firstChild.appendChild(tempCard);
+
+            const editButton = document.createElement("button");
+            editButton.type = "button";
+            editButton.innerHTML = '<img src="/public/img/edit-icon.svg" alt="Edit test icon">';
+            editButton.addEventListener("click", () => {
+                redirect('prova.html', {id: `${data_test.idProva}`});
+            });
+
+            liDivTempCard.querySelector("div.test-actions.edit").appendChild(editButton);
+
+            element.firstChild.appendChild(liTempCard);
         })
 
     } catch (error) {
-        document.querySelector("#questions-list-container li:first-of-type").textContent = "Conexão com o banco de dados foi perdida...";
-        console.error("Erro ao carregar questões para exibição: " + error);
+        document.querySelector("#tests-list-container li:first-of-type").textContent = "Não foi possível estabelecer conexão com o banco de dados...";
+        console.error("Erro ao carregar provas para exibição: " + error);
     }
 }
 
-export function urlRedirectById(id) {
-    window.location.href = `questao.html?id=${id}`;
-}
-
-window.urlRedirectById = urlRedirectById;
 window.testsCardLoader = testsCardLoader;

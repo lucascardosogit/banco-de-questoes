@@ -29,47 +29,49 @@
       </nav>
 
       <div id="container-quest-reg" class="container">
-        <h1 class="title">Cadastro de Questões</h1>
-        <form class="form-container" id="quest-form">
-          <label for="quest-course">Disciplina</label>
-          <input type="text" name="quest-course" id="quest-course" placeholder="Disciplina A" required></input>
-
-          <label for="quest-subjects">Assunto (s)</label>
-          <input type="text" name="quest-subjects" id="quest-subjects" placeholder="Assunto1, assunto2..." required></input>
-
-          <label for="quest-header">Título da Questão</label>
-          <textarea id="quest-header" placeholder="Digite o título da questão..." required></textarea>
-
-          <p>Alternativas</p>
-          <div class="alternative">
-            <input type="radio" name="isCorrect" value="0" />
-            <input id="alternative-1" type="text" class="alternative-input" placeholder="Alternativa A" />
-          </div>
-
-          <div class="alternative">
-            <input type="radio" name="isCorrect" value="1" />
-            <input id="alternative-2" type="text" class="alternative-input" placeholder="Alternativa B" />
-          </div>
-
-          <div class="alternative">
-            <input type="radio" name="isCorrect" value="2" />
-            <input id="alternative-3" type="text" class="alternative-input" placeholder="Alternativa C" />
-          </div>
-
-          <div class="alternative">
-            <input type="radio" name="isCorrect" value="3" />
-            <input id="alternative-4" type="text" class="alternative-input" placeholder="Alternativa D" />
-          </div>
-
-          <div class="alternative">
-            <input type="radio" name="isCorrect" value="4" />
-            <input id="alternative-5" type="text" class="alternative-input" placeholder="Alternativa E" />
-          </div>
-
-          <div class="quest-actions">
-            <button type="button" onclick="setQuest()">Cadastrar</button>
-          </div>
-        </form>
+        <div>
+          <h1 class="title">Cadastro de Questões</h1>
+          <form class="form-container" id="quest-form">
+            <label for="quest-course">Disciplina</label>
+            <input type="text" name="quest-course" id="quest-course" placeholder="Disciplina A" required></input>
+            
+            <label for="quest-subjects">Assunto (s)</label>
+            <input type="text" name="quest-subjects" id="quest-subjects" placeholder="Assunto1, assunto2..." required></input>
+            
+            <label for="quest-header">Título da Questão</label>
+            <textarea id="quest-header" placeholder="Digite o título da questão..." required></textarea>
+            
+            <p>Alternativas</p>
+            <div class="alternative">
+              <input type="radio" name="isCorrect" value="0" />
+              <input id="alternative-1" type="text" class="alternative-input" placeholder="Alternativa A" />
+            </div>
+            
+            <div class="alternative">
+              <input type="radio" name="isCorrect" value="1" />
+              <input id="alternative-2" type="text" class="alternative-input" placeholder="Alternativa B" />
+            </div>
+            
+            <div class="alternative">
+              <input type="radio" name="isCorrect" value="2" />
+              <input id="alternative-3" type="text" class="alternative-input" placeholder="Alternativa C" />
+            </div>
+            
+            <div class="alternative">
+              <input type="radio" name="isCorrect" value="3" />
+              <input id="alternative-4" type="text" class="alternative-input" placeholder="Alternativa D" />
+            </div>
+            
+            <div class="alternative">
+              <input type="radio" name="isCorrect" value="4" />
+              <input id="alternative-5" type="text" class="alternative-input" placeholder="Alternativa E" />
+            </div>
+            
+            <div class="quest-actions">
+              <button type="button" onclick="setQuest()">Cadastrar</button>
+            </div>
+          </form>
+        </div>
       </div>
     </main>
     <script type="module" src="./js/questao.js"></script>

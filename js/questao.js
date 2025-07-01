@@ -82,6 +82,7 @@ async function setQuest() {
     document.getElementById("quest-form").reset();
     
   } catch (error) {
+    alert("Não foi possível estabelecer conexão com o banco de dados...");
     console.error(`Erro ao salvar a questão no banco de dados: ${error}`);
   }
 }
@@ -126,18 +127,17 @@ async function loadQuestionForEdit() {
 
     buttonForDelete.onclick = async () => {
       let deleteConfirmation = confirm("Tem certeza que deseja excluir esta questão?");
-      console.log(deleteConfirmation);
-    if (deleteConfirmation) {
-      try {
-        await deleteQuestion(data.idQuestao);
-        alert("Questão excluída com sucesso!");
-        window.location.href = "questoes.html";
-      } catch (error) {
-        alert("Erro ao excluir questão!");
-        console.error("Erro ao excluir:", error);
-      }
+      if (deleteConfirmation) {
+        try {
+          await deleteQuestion(data.idQuestao);
+          alert("Questão excluída com sucesso!");
+          window.location.href = "questoes.html";
+        } catch (error) {
+          alert("Erro ao excluir questão!");
+          console.error("Erro ao excluir:", error);
+        }
+      };
     };
-};
 
     buttonForDelete.innerHTML = '<img src="/public/img/delete-svg.svg" alt="Delete button"> Excluir';
     document.querySelector('.quest-actions').appendChild(buttonForDelete);

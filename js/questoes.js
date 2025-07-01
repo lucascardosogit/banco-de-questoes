@@ -1,4 +1,4 @@
-import {getQuestions} from './api.js';
+import {getQuestions, redirect} from './api.js';
 
 async function questionsCardLoader() {
     const element = document.getElementById("questions-list-container");
@@ -16,30 +16,35 @@ async function questionsCardLoader() {
         }
 
         data.forEach((data_quest) => {
-            const tempCard = document.createElement("li");
-            tempCard.appendChild(document.createElement("div"));
-            tempCard.classList.add("question-card");
+            const liTempCard = document.createElement("li");
+            const liDivTempCard = document.createElement("div");
+            liTempCard.appendChild(liDivTempCard);
+            liDivTempCard.classList.add("question-card");
 
-            tempCard.innerHTML = `
-            <div class="quest-actions edit">
-                <button type="button" onclick="urlRedirectById(${data_quest.idQuestao})"><img src="/public/img/edit-icon.svg" alt="Edit quest icon"></button>
-            </div>
+
+            liDivTempCard.innerHTML = `
+            <div class="quest-actions edit"></div>
             <p>${data_quest.idQuestao}) ${data_quest.titulo}</p>
             <p>Disciplina: ${data_quest.disciplina}</p>
-            <p class="question-header">Assuntos: ${(data_quest.assuntos).join(', ')}</p>
+            <p class="categories">Assuntos: ${(data_quest.assuntos).join(', ')}</p>
             `;
-            element.firstChild.appendChild(tempCard);
-        })
+
+            const editButton = document.createElement("button");
+            editButton.type = "button";
+            editButton.innerHTML = '<img src="/public/img/edit-icon.svg" alt="Edit quest icon">';
+            editButton.addEventListener("click", () => {
+                redirect('questao.html', {id: `${data_quest.idQuestao}`});
+            });
+
+            liDivTempCard.querySelector("div.quest-actions.edit").appendChild(editButton);
+
+            element.firstChild.appendChild(liTempCard);
+        });
 
     } catch (error) {
-        document.querySelector("#questions-list-container li:first-of-type").textContent = "Conexão com o banco de dados foi perdida...";
+        document.querySelector("#questions-list-container li:first-of-type").textContent = "Não foi possível estabelecer conexão com o banco de dados...";
         console.error("Erro ao carregar questões para exibição: " + error);
     }
 }
 
-export function urlRedirectById(id) {
-    window.location.href = `questao.html?id=${id}`;
-}
-
-window.urlRedirectById = urlRedirectById;
 window.questionsCardLoader = questionsCardLoader;

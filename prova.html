@@ -6,7 +6,7 @@
     <title>Banco de Questões</title>
     <link rel="stylesheet" href="/style.css" />
   </head>
-  <body onload="testGenLoader()">
+  <body>
     <header>
       <nav class="main-nav">
         <div>
@@ -28,46 +28,45 @@
         </footer>
       </nav>
 
-      <div id="container-test-gen" class="container">
-        <h1 class="title">Corpo de Prova</h1>
-        <div id="container-layout">
-          <div>
-            <form class="form-container" id="test-form">
-              <label for="test-header" class="form-label">Cabeçalho</label>
-              <input type="text" id="test-header" placeholder="Nome, RGM e Professor"/>
-              
-              <label for="test-course" class="form-label">Cadeira da Faculdade</label>
-              <select name="test-course" id="test-course"></select>
-              
-              <label for="test-matter" class="form-label">Disciplina</label>
-              <select name="test-matter" id="test-matter"></select>
-              
-              <label for="test-content" class="form-label">Assunto(s)</label>
-              <select name="test-content" id="test-content"></select>
-              
-              <label for="test-class" class="form-label">Turma/Semestre</label>
-              <input type="text" id="test-class" placeholder="Ex: 3º Semestre - TI"/>
-              
-              <label for="tests-variation" class="form-label">Número de variações</label>
-              <input type="number" id="tests-variation" min="1" placeholder="Ex: 3" />
-              
-              <div class="btn-group">
-                <button type="submit" onclick="gerarProva()">
-                  Salvar
-                </button>
-                <button type="reset" class="clear">Excluir</button>
+      <div id="container-test-reg" class="container">
+        <div>
+
+          <h1 class="title">Cadastro de Provas</h1>
+          <form class="form-container" id="test-form">
+            <label for="test-header">Título</label>
+            <input type="text" id="test-header" name="test-header" placeholder="Prova1" required/>
+            
+            <label for="test-course">Disciplina</label>
+            <input type="text" name="test-course" id="test-course" placeholder="Disciplina A" required></input>
+          </form>
+          
+          <form action="submit" class="form-container">
+            <label for="search-subject"> Filtro de assuntos:</label>
+            <input type="text" id="search-subject" name="search-subject" placeholder="Pesquisando por 'Assunto1'">
+            <button type="submit"><img src="/public/img/search-icon.svg" alt="Search icon"></button>
+          </form>
+        </div>
+          
+          <div id="quest-n-search-container">
+            <div id="questions-researched" class="researched-container">
+              <h2 class="subtitle">Selecionar Questões</h2>
+              <div id="researched-result">
+                <ul></ul>
               </div>
-            </form>
+            </div>
+            <div id="questions-selected" class="researched-container">
+              <h2 class="subtitle">Questões Selecionadas</h2>
+              <div id="selected-result">
+                <ul></ul>
+              </div>
+            </div>
           </div>
           
-          <div class="quest-container">
-            <!-- Adicionar tratativas para quando textos das questões forem muito grandes ocuparem mais de uma linha -->
-            <h2 class="subtitle">Selecionar Questões</h2>
-            <div id="quest-list-container"></div>
+          <div class="test-actions">
+            <button onclick="setTest()">Cadastrar</button>
           </div>
-        </div>
       </div>
     </main>
-    <script src="/script.js"></script>
+    <script type="module" src="/js/prova.js"></script>
   </body>
 </html>
