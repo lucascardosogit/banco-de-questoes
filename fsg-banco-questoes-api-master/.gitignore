@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# BD files
+fsg-banco-questoes-api-master/bancoquestoes_dev.db
+fsg-banco-questoes-api-master/bancoquestoes_dev.db-shm
+fsg-banco-questoes-api-master/bancoquestoes_dev.db-wal

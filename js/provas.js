@@ -16,7 +16,6 @@ async function testsCardLoader() {
         }
 
         data.forEach((data_test) => {
-            console.log(data_test);
             const liTempCard = document.createElement("li");
             const liDivTempCard = document.createElement("div");
             liTempCard.appendChild(liDivTempCard);
@@ -25,7 +24,7 @@ async function testsCardLoader() {
 
             liDivTempCard.innerHTML = `
             <div class="test-actions edit"></div>
-            <p>${data_test.idProva}) ${data_test.titulo}</p>
+            <p>Título: ${data_test.titulo}</p>
             <p>Disciplina: ${data_test.disciplina}</p>
             <p class="categories">Quantidade de Questões: ${data_test.quantidadeQuestoes}</p>
             `;

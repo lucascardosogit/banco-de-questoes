@@ -4,24 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Banco de Questões</title>
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <header>
-      <nav class="main-nav">
-        <div>
-          <a href="./index.html"><img src="/public/img/home-icon.svg" alt="Home icon svg">Home</a>
-        </div>
-      </nav>
-    </header>
-
     <main>
+      <button id="hamburguer-menu"><img src="./public/img/hamburguer-menu.svg" alt="Hamburguer menu"></button>
       <nav class="sidebar-nav">
         <ul>
-          <li><a href="./questao.html" ><img src="/public/img/add-svg.svg" alt="Add svg">Cadastrar questão</a></li>
-          <li><a href="./questoes.html" ><img src="/public/img/database-quest.svg" alt="Add svg">Banco de Questões</a></li>
-          <li><a href="./prova.html" ><img src="/public/img/test-icon.svg" alt="Stack svg">Cadastrar prova</a></li>
-          <li><a href="./provas.html" ><img src="/public/img/tests-area-icon.svg" alt="Test svg">Página de Provas</a></li>
+          <li><a href="./index.html"><img src="./public/img/home-icon.svg" alt="Home icon svg">Home</a></li>
+          <li><a href="./questao.html" ><img src="./public/img/add-svg.svg" alt="Add svg">Cadastrar questão</a></li>
+          <li><a href="./questoes.html" ><img src="./public/img/database-quest.svg" alt="Add svg">Banco de Questões</a></li>
+          <li><a href="./prova.html" ><img src="./public/img/test-icon.svg" alt="Stack svg">Cadastrar prova</a></li>
+          <li><a href="./provas.html" ><img src="./public/img/tests-area-icon.svg" alt="Test svg">Página de Provas</a></li>
         </ul>
         <footer>
           <p>&copy; Lucas Cardoso 2025.</p>
@@ -29,21 +23,23 @@
       </nav>
       
       <div id="container-home" class="container">
+        <h1>Bem-vindo(a)!</h1>
         <div class="menu-options">
           <a href="./questoes.html">
             <div class="card-menu">
-              <img src="/public/img/database-quest.svg" alt="Database quest icon">
+              <img src="./public/img/database-quest.svg" alt="Database quest icon">
               <h2>Banco de Questões</h2>
             </div>
           </a>
           <a href="./provas.html">
             <div class="card-menu">
-              <img src="/public/img/test-icon.svg" alt="Test area icon">
+              <img src="./public/img/test-icon.svg" alt="Test area icon">
               <h2>Página de Provas</h2>
             </div>
           </a>
         </div>
       </div>
     </main>
+    <script src="./js/menu.js"></script>
   </body>
 </html>

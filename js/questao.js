@@ -96,7 +96,7 @@ async function loadQuestionForEdit() {
 
   let buttonForInsert = document.querySelector(".alternative+div.quest-actions > button");
   buttonForInsert.classList.add("edit");
-  buttonForInsert.innerHTML = "<img src='/public/img/check-icon.svg' alt='Insert button'> Inserir";
+  buttonForInsert.innerHTML = "<img src='/public/img/check-icon.svg' alt='Insert button'> Atualizar";
 
   try {
     const data = await getQuestionById(params);

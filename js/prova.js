@@ -74,7 +74,7 @@ async function loadTestForEdit() {
 
   let buttonForInsert = document.querySelector("div.test-actions > button");
   buttonForInsert.classList.add("edit");
-  buttonForInsert.innerHTML = "<img src='/public/img/check-icon.svg' alt='Insert button'> Inserir";
+  buttonForInsert.innerHTML = "<img src='/public/img/check-icon.svg' alt='Insert button'> Atualizar";
 
   try {
     const data = await getTestById(params);
@@ -85,8 +85,6 @@ async function loadTestForEdit() {
     }
     
     document.querySelector("h1").textContent = "Edição de Prova";
-
-    console.log(data);
 
     document.getElementById('test-header').value = data.titulo;
     document.getElementById('test-course').value = data.disciplina;
@@ -129,7 +127,7 @@ async function loadQuestions() {
 
         return;
     } else {
-        document.getElementById("test-course").style.border = '2px solid red';
+        document.getElementById("test-course").style.border = '1px solid #ccc';
     }
     
     ulContainer.innerHTML = `<li>Carregando questões...</li>`;
